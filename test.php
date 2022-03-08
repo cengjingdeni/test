@@ -33,7 +33,6 @@ class Jwt {
         if(is_array($payload))
         {
             $base64header=self::base64UrlEncode(json_encode(self::$header,JSON_UNESCAPED_UNICODE));
-            return $base64header;
             $base64payload=self::base64UrlEncode(json_encode($payload,JSON_UNESCAPED_UNICODE));
             $token=$base64header.'.'.$base64payload.'.'.self::signature($base64header.'.'.$base64payload,self::$key,self::$header['alg']);
             return $token;
@@ -130,7 +129,6 @@ class Jwt {
 $payload=array('sub'=>'1234567890','name'=>'John Doe','iat'=>1647739992);
 $jwt=new Jwt;
 $token=$jwt->getToken($payload);
-print_r($token);exit();
 echo "<pre>";
 echo $token;
 
